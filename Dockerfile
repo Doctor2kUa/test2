@@ -1,7 +1,7 @@
 FROM alpine:latest as alpine
 RUN mkdir -p /app
 WORKDIR /app
-echo "Building clear alpine"
+CMD [ echo "Building clear alpine" ]
 #COPY package*.json /app/
 #RUN npm install 
 #COPY . /app/
