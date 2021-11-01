@@ -1,8 +1,9 @@
-FROM node:latest as node
+FROM alpine:latest as alpine
 RUN mkdir -p /app
 WORKDIR /app
+echo "Building clear alpine"
 #COPY package*.json /app/
-RUN npm install 
+#RUN npm install 
 #COPY . /app/
 EXPOSE 4200
-CMD ["npm", "run", "start"]
+CMD ["sleep 100000"]
