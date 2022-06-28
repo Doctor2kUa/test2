@@ -66,29 +66,22 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
+#          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/fff:1.0.0
+          
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
-#        uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
-#        with:
-#          context: .
-#          push: ${{ github.event_name != 'pull_request' }}
-##          tags: ${{ steps.meta.outputs.tags }}
-#          tags: doctor2kua/app:latest,doctor2kua/app:1.0.0
-#          labels: ${{ steps.meta.outputs.labels }}
-
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            user/app:latest
-            user/app:1.0.0
-      # Sign the resulting Docker image digest except on PRs.
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+#          tags: doctor2kua/app:latest,doctor2kua/app:1.0.0
+          labels: ${{ steps.meta.outputs.labels }}
+          
+#       image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
       # repository is public to avoid leaking data.  If you would like to publish
       # transparency data even for private images, pass --force to cosign below.
