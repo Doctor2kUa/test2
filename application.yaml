@@ -12,7 +12,6 @@ spec:
   source:
     repoURL: https://github.com/Doctor2kUa/testrepo.git
     targetRevision: HEAD
-    path: /
 
   syncPolicy:
     syncOptions:
@@ -20,4 +19,3 @@ spec:
     automated:
       selfHeal: true
       prune: true
-      
