@@ -43,7 +43,7 @@ jobs:
           echo `date` >> COMMIT
       - name: Commit files # transfer the new html files back into the repository
         run: |
-          git add yamls/deployment.yaml
+          git add COMMIT
           git config --local user.name "Doctor2kUa"
           git commit -m "Updating to last registry version"
       - name: Push changes # push the output folder to your repo
