@@ -40,6 +40,7 @@ jobs:
       - name: Update deloyment.yaml future
         run: |
           cat COMMIT
+          echo `date` >> COMMIT
       - name: Commit files # transfer the new html files back into the repository
         run: |
           git add yamls/deployment.yaml
