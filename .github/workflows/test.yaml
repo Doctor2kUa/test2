@@ -1,0 +1,58 @@
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}_v1
+name: Build and Deploy
+
+
+on:
+  push:
+    branches:
+      - "main"
+#    paths-ignore:
+#      - 'yamls/deployment.yaml'
+
+jobs:
+  deploy:
+    # Add 'id-token' with the intended permissions for workload identity federation
+    permissions:
+      contents: 'write'
+      id-token: 'write'
+      packages: 'write'
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - id: step2
+        run: echo ${{ steps.tolower.outputs.lowercase }}
+      - id: step3
+        run: echo ${{ github.ref }} 
+      - id: step4
+        run: echo ${GITHUB_REF##*/}
+      - id: step5
+        run: echo ${IMAGE_NAME}
+
+      # END - Docker auth and build
+      - name: Update deloyment.yaml future
+        run: |
+          cat COMMIT
+      - name: Commit files # transfer the new html files back into the repository
+        run: |
+          git add yamls/deployment.yaml
+          git config --local user.name "Doctor2kUa"
+          git commit -m "Updating to last registry version"
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
+      # If required, use the Cloud Run url output in later steps
+      - name: SUMMARY
+        run: |-
+          echo BUILDED "${{ env.REGISTRY }}/${{ steps.tolower.outputs.lowercase }}:${{ github.run_number }}" /
+              ${{ steps.build_and_push.outputs }} && /
+          echo '### BUILD SUCSESS :rocket: <br /> ${{ env.REGISTRY }}/${{ steps.tolower.outputs.lowercase }}:${{ github.run_number }}' >> $GITHUB_STEP_SUMMARY
