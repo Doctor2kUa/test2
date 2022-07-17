@@ -52,8 +52,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force: true
       # If required, use the Cloud Run url output in later steps
-      - name: SUMMARY
-        run: |-
-          echo BUILDED "${{ env.REGISTRY }}/${{ steps.tolower.outputs.lowercase }}:${{ github.run_number }}" /
-              ${{ steps.build_and_push.outputs }} && /
-          echo '### BUILD SUCSESS :rocket: <br /> ${{ env.REGISTRY }}/${{ steps.tolower.outputs.lowercase }}:${{ github.run_number }}' >> $GITHUB_STEP_SUMMARY
