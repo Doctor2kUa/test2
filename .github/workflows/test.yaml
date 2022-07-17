@@ -2,7 +2,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}_v1
+  IMAGE_NAME: ${{ github.repository }}
 name: Build and Deploy
 
 
@@ -34,7 +34,7 @@ jobs:
       - id: step4
         run: echo ${GITHUB_REF##*/}
       - id: step5
-        run: echo ${IMAGE_NAME}
+        run: echo ${IMAGE_NAME}_${GITHUB_REF##*/}
 
       # END - Docker auth and build
       - name: Update deloyment.yaml future
