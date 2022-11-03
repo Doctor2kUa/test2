@@ -42,7 +42,7 @@ jobs:
         with:
           string: ${{ env.IMAGE_NAME }}
         
-      - id: step2
+      - id: step_tolower
         run: echo ${{ steps.tolower.outputs.lowercase }}
       # END - Docker auth and build
       - name: Update deloyment.yaml future
