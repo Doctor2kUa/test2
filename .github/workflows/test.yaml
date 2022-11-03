@@ -2,7 +2,8 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+#  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: VAsYa
 name: Build and Deploy
 
 
@@ -35,7 +36,14 @@ jobs:
         run: echo ${GITHUB_REF##*/}
       - id: step5
         run: echo ${IMAGE_NAME}_${GITHUB_REF##*/}
-
+        
+      - id: tolower
+        uses: ASzc/change-string-case-action@v4
+        with:
+          string: ${{ env.IMAGE_NAME }}
+        
+      - id: step2
+        run: echo ${{ steps.tolower.outputs.lowercase }}
       # END - Docker auth and build
       - name: Update deloyment.yaml future
         run: |
