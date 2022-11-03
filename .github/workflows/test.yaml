@@ -10,7 +10,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - "v1.0.0"
+      - "main"
 #    paths-ignore:
 #      - 'yamls/deployment.yaml'
 
