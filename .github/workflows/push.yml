@@ -54,13 +54,13 @@ jobs:
           # 2.3 Add private key in the source repository: <external repository>/Settings/Secrets/Actions/New repository secret
           #     Name: DEPLOY_PRIVATE_KEY, Value Paste the private key.
           # SSH_DEPLOY_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-          SSH_DEPLOY_KEY: ${{ secrets.UaItHub jenk/argocd }}
+          SSH_DEPLOY_KEY: ${{ secrets.test_push }}
         with:
           # GitHub Action output files
           source-directory: /
           destination-github-username: Doctor2kUa
           destination-repository-name: testrepo
-          user-email: <your email>
+          user-email: vasya@gmail.com
           # It defaults to `main`
           target-branch: "dev"
 
