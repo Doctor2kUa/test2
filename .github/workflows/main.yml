@@ -14,6 +14,7 @@ jobs:
         with:
           ref: main
           repository: Doctor2kUa/testrepo
+          path: dest
           
       - name: check1
         run: |
@@ -26,5 +27,6 @@ jobs:
           git config user.email github-actions@github.com
           git add 1.txt
           sh; ls -la
+          sh; ls -la dest
           git commit -m updated
           git push
