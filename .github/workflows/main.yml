@@ -4,7 +4,7 @@ on:
 permissions:
   contents: write
 jobs:
-  example:
+  sync-to-preprod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
