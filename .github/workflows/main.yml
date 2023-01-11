@@ -17,7 +17,7 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          sh; rsync -av source/ . --exclude sourcerepo --exclude .git --exclude .gitignore --exclude .github
+          sh; rsync -av sourcerepo/ . --exclude sourcerepo --exclude .git --exclude .gitignore --exclude .github
           sh; rm -rf sourcerepo
           git add . 
           sh; ls -la 
