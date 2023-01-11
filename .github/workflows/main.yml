@@ -19,7 +19,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           sh; rsync -av source/ . --exclude source --exclude .git --exclude .gitignore --exclude .github
-          git add .
+          git add . -- :!source/*
           sh; ls -la source
           
           git commit -m "Updated ${{ github.event.repository.updated_at}} "
