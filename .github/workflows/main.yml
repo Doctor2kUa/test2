@@ -9,17 +9,12 @@ jobs:
   example:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           ref: main
           repository: Doctor2kUa/testrepo
-          path: dest
-          
-      - name: check1
-        run: |
-          ls -la 
-      - uses: actions/checkout@v3
+          path: source
       - shell: bash
         run: |
           date > 1.txt
@@ -27,6 +22,6 @@ jobs:
           git config user.email github-actions@github.com
           git add 1.txt
           sh; ls -la
-          sh; ls -la dest
+          sh; ls -la source
           git commit -m updated
           git push
