@@ -1,0 +1,17 @@
+name: Example
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - shell: bash
+        run: |
+          date > 1.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add 1.txt
+          git commit -m updated
+          git push
