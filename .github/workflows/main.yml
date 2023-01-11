@@ -1,4 +1,4 @@
-name: Example
+name: Sync from preprod
 on:
   workflow_dispatch:
 permissions:
@@ -18,8 +18,9 @@ jobs:
           date > 1.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
+          sh; rsync -av --progress source . --exclude dest --exclude .git --exclude .gitignore --exclude .github
           git add 1.txt
           sh; ls -la
-          sh; ls -la source
-          git commit -m updated
+          
+          git commit -m "Updated ${{ github.event.repository.updated_at}} "
           git push
