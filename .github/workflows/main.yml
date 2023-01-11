@@ -12,16 +12,15 @@ jobs:
         with:
           ref: main
           repository: Doctor2kUa/testrepo
-          path: source
+          path: sourcerepo
       - shell: bash
         run: |
-          date > 1.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
-          sh; rsync -av source/ . --exclude source --exclude .git --exclude .gitignore --exclude .github
+          sh; rsync -av source/ . --exclude sourcerepo --exclude .git --exclude .gitignore --exclude .github
+          sh; rm -rf sourcerepo
           git add . 
-          git reset -- source/*
-          sh; ls -la source
+          sh; ls -la 
           
           git commit -m "Updated ${{ github.event.repository.updated_at}} "
           git push
